@@ -44,7 +44,7 @@ def _find_todo_comment(payload: List[str]):
     return output
 
 
-def parse(path: str):  # TODO: Make this function take the path to file
+def parse(path: str) -> int:  # TODO: Make this function take the path to file
     with open(path, "r") as file:
         output = []
 
