@@ -1,5 +1,6 @@
 import re
 import json
+from os import getcwd
 from typing import Union, List
 
 
@@ -24,7 +25,7 @@ def _find_comment_start_index(payload: List[str]):
     return result
 
 
-def _find_todo_comment(payload: List[str]):
+def _find_todo_comment(comment: List[str], line_num: int, file_path: str):
     output = None
 
     i = 0
@@ -32,10 +33,12 @@ def _find_todo_comment(payload: List[str]):
     # Find a trace of todo in the first three words
     while i <= 3:
 
-        if re.search("TODO", payload[i], re.IGNORECASE) is not None:
+        if re.search("TODO", comment[i], re.IGNORECASE) is not None:
             output = {
                 "type": "todo",
-                "title": " ".join(payload[i + 1 :]),
+                "title": " ".join(comment[i + 1 :]),
+                "path": file_path,
+                "lineNumber": line_num,
             }  # TODO: define the type for this dictionary
             break
 
@@ -44,19 +47,22 @@ def _find_todo_comment(payload: List[str]):
     return output
 
 
-def parse(path: str) -> int:  # TODO: Make this function take the path to file
-    with open(path, "r") as file:
+def parse(path: str) -> int:
+    
+    full_path = f"{getcwd()}{path}" # TODO: Handle the case when input does not start with forward slash
+
+    with open(full_path, "r") as file:
         output = []
 
-        for line in file.readlines():
+        for index, line in enumerate(file.readlines()):
 
             oneline_comment = re.search(JS_ONELINE_COMMENT_PATTERN, line)
 
             if oneline_comment is not None:
                 content = oneline_comment.string.split()
-                content = content[_find_comment_start_index(content):]
+                content = content[_find_comment_start_index(content) :]
 
-                todo_comment = _find_todo_comment(content)
+                todo_comment = _find_todo_comment(content, index + 1, path)
 
                 if todo_comment is not None:
                     output.append(todo_comment)
