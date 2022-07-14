@@ -12,6 +12,14 @@ def test_parser_typescript():
     
     assert result == 8
 
+def test_parser_javascript():
+    """Should parse 3 to-dos from input file"""
+    pwd = getcwd()
+    result = parse(f"{pwd}/tests/parser/data/javascript.js")
+    
+    assert result == 3
+
+
 
 # Test the parse call: check if the correct output is returned
 
