@@ -13,10 +13,6 @@ def _write_to_json(payload: str):
         output_file.close
 
 
-def _find_todo_comment(comment: str):
-    pass
-
-
 def _find_comment_start_index(payload: List[str]):
     result = None
 
@@ -28,9 +24,28 @@ def _find_comment_start_index(payload: List[str]):
     return result
 
 
-def run_parser():
-    with open("input/index.ts", "r") as file:
+def _find_todo_comment(payload: List[str]):
+    output = None
 
+    i = 0
+
+    # Find a trace of todo in the first three words
+    while i <= 3:
+
+        if re.search("TODO", payload[i], re.IGNORECASE) is not None:
+            output = {
+                "type": "todo",
+                "title": " ".join(payload[i + 1 :]),
+            }  # TODO: define the type for this dictionary
+            break
+
+        i += 1
+
+    return output
+
+
+def parse():  # TODO: Make this function take the path to file
+    with open("input/index.ts", "r") as file:
         output = []
 
         for line in file.readlines():
@@ -39,23 +54,12 @@ def run_parser():
 
             if oneline_comment is not None:
                 content = oneline_comment.string.split()
-                comment_start_index = _find_comment_start_index(content)
+                content = content[_find_comment_start_index(content):]
 
-                content = content[comment_start_index:]
+                todo_comment = _find_todo_comment(content)
 
-                i = 0
-
-                # Find a trace of todo in the first three words
-                while i <= 3:
-                    if re.search("TODO", content[i], re.IGNORECASE) is not None:
-                        todo_comment = {
-                            "type": "todo",
-                            "title": " ".join(content[i + 1 :]),
-                        }  # TODO: define the type for this dictionary
-                        output.append(todo_comment)
-                        break
-
-                    i += 1
+                if todo_comment is not None:
+                    output.append(todo_comment)
 
         _write_to_json(json.dumps(output))
 
