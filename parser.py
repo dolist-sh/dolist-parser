@@ -1,9 +1,9 @@
 import re
 import json
-import typing
+from typing import Union, List
 
 
-PY_INLINE_COMMENT_PATTERN = "^//"
+JS_ONELINE_COMMENT_PATTERN = "//"
 
 
 def write_to_json(payload: str):
@@ -13,15 +13,35 @@ def write_to_json(payload: str):
         output_file.close
 
 
+def find_todo_comment(comment: str):
+    pass
+
+
+def find_comment_start_index(payload: List[str]):
+    result = None
+
+    for (index, value) in enumerate(payload):
+        if re.match(f"^{JS_ONELINE_COMMENT_PATTERN}", value, re.IGNORECASE) is not None:
+            result = index
+            break
+
+    return result
+
+
 with open("input/index.ts", "r") as file:
+
     output = []
 
     for line in file.readlines():
-        inline_comment = re.match(PY_INLINE_COMMENT_PATTERN, line)
 
-        if inline_comment is not None:
+        oneline_comment = re.search(JS_ONELINE_COMMENT_PATTERN, line)
 
-            content = inline_comment.string.split()
+        if oneline_comment is not None:
+            content = oneline_comment.string.split()
+            comment_start_index = find_comment_start_index(content)
+
+            content = content[comment_start_index:]
+
             i = 0
 
             # Find a trace of todo in the first three words
