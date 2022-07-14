@@ -1,6 +1,8 @@
 import re
 import json
 from os import getcwd
+from datetime import datetime
+from time import time
 from typing import Union, List
 
 
@@ -8,8 +10,10 @@ JS_ONELINE_COMMENT_PATTERN = "//"
 
 
 def _write_to_json(payload: str):
-    # TODO: add timestamp to the file name
-    with open("output/output.json", "w") as output_file:
+    now = datetime.now()
+    unix_time = int(time())
+    
+    with open(f"output/output-{now.year}-{now.month}-{now.day}-{unix_time}.json", "w") as output_file:
         output_file.write(payload)
         output_file.close
 
@@ -47,9 +51,17 @@ def _find_todo_comment(comment: List[str], line_num: int, file_path: str):
     return output
 
 
-def parse(path: str) -> int:
+def _get_filepath(path: str) -> str:
+    directory = getcwd()
+    filepath = path
+
+    if path[0] != "/":
+        filepath = f"/{filepath}"
     
-    full_path = f"{getcwd()}{path}" # TODO: Handle the case when input does not start with forward slash
+    return f"{directory}{filepath}"
+
+def parse(path: str) -> int:
+    full_path = _get_filepath(path)
 
     with open(full_path, "r") as file:
         output = []
