@@ -44,8 +44,8 @@ def _find_todo_comment(payload: List[str]):
     return output
 
 
-def parse():  # TODO: Make this function take the path to file
-    with open("input/index.ts", "r") as file:
+def parse(path: str):  # TODO: Make this function take the path to file
+    with open(path, "r") as file:
         output = []
 
         for line in file.readlines():
@@ -65,3 +65,4 @@ def parse():  # TODO: Make this function take the path to file
 
         print("All done! ✨ 🍰 ✨")
         print(f"Found {len(output)} to-dos from comment")
+        return len(output)
