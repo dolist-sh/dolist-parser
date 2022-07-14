@@ -1,41 +1,39 @@
 import re
+import json
 import typing
 
 
 PY_INLINE_COMMENT_PATTERN = "^//"
 
 
-def _is_todo_comment(input: str) -> bool:
-    result = False
-
-    input = input.split()
-
-    i = 0
-
-    # Find trace of todo in first
-    while i <= 3:
-        if re.search("TODO", input[i], re.IGNORECASE) is not None:
-            result = True
-            break
-
-        i += 1
-
-    return result
+def write_to_json(payload: str):
+    # TODO: add timestamp to the file name
+    with open("output/output.json", "w") as output_file:
+        output_file.write(payload)
+        output_file.close
 
 
 with open("input/index.ts", "r") as file:
-    for line in file.readlines():
+    output = []
 
+    for line in file.readlines():
         inline_comment = re.match(PY_INLINE_COMMENT_PATTERN, line)
 
         if inline_comment is not None:
-            print("----------------------------------------")
-            print(f"Original text input: {inline_comment.string}")
 
-            result = _is_todo_comment(inline_comment.string)
+            content = inline_comment.string.split()
+            i = 0
 
-            print(f"Result is {result}")
-            print("----------------------------------------")
+            # Find a trace of todo in the first three words
+            while i <= 3:
+                if re.search("TODO", content[i], re.IGNORECASE) is not None:
+                    todo_comment = {
+                        "type": "todo",
+                        "title": " ".join(content[i + 1 :]),
+                    }  # TODO: define the type for this dictionary
+                    output.append(todo_comment)
+                    break
 
-            if result is True:
-                print("Create data object here")
+                i += 1
+
+    write_to_json(json.dumps(output))
