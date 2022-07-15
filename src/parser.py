@@ -86,7 +86,7 @@ def _handle_multiline_comment(comments, file_path: str) -> Union[ParsedComment, 
         result = ParsedComment(
             type="TODO",
             commentStyle="multiline",
-            title=title,  # TODO: trim the title for the case of comment ending with the closing pattern
+            title=title,
             fullComment=full_comment,
             path=file_path,
             lineNumber=comment_at_index + 1,
