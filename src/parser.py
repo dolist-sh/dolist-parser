@@ -60,6 +60,7 @@ def _handle_multiline_comment(comments, file_path: str) -> Union[ParsedComment, 
         i = 0
 
         while (i <= 3) and (i <= len(content) - 1):
+            print(content[i])
 
             if re.search("TODO", content[i], re.IGNORECASE) is not None:
                 comment_to_parse = True  # flag for further processing
@@ -80,7 +81,7 @@ def _handle_multiline_comment(comments, file_path: str) -> Union[ParsedComment, 
         result = ParsedComment(
             type="TODO",
             commentStyle="multiline",
-            title=title, # TODO: trim the title for the case of comment ending with the closing pattern
+            title=title,  # TODO: trim the title for the case of comment ending with the closing pattern
             fullComment=full_comment,
             path=file_path,
             lineNumber=comment_at_index + 1,
@@ -101,24 +102,32 @@ def parse(path: str) -> int:
 
         for index, line in enumerate(file.readlines()):
 
-            """Looking for one-line comments"""
+            # fmt: off
             oneline_comment = re.search(JS_ONELINE_PATTERN, line)
+            multiline_comment_open = re.search(JS_MULTILINE_OPEN_PATTERN, line)
+            multiline_comment_close = re.search(JS_MULTILINE_CLOSE_PATTERN, line)
+            # fmt: on
 
             if oneline_comment is not None:
+                """Handle one-line comments"""
                 content = oneline_comment.string.split()
                 result = _handle_oneline_comment(content, index + 1, path)
 
                 if result is not None:
                     output.append(result)
 
+            elif (multiline_comment_open is not None) and (
+                multiline_comment_close is not None
+            ):
+                """Handle one-line comment with multiple comment noation"""
+                content = line.split()
+                result = _handle_oneline_comment(content, index + 1, path)
+
+                if result is not None:
+                    output.append(result)
+
             else:
-                """Looking for multi-line comments"""
-
-                # fmt: off
-                multiline_comment_open = re.search(JS_MULTILINE_OPEN_PATTERN, line)
-                multiline_comment_close = re.search(JS_MULTILINE_CLOSE_PATTERN, line)
-                # fmt: on
-
+                """Handle multi-line comments"""
                 if multiline_comment_open is not None:
                     in_multiline_comment = True
                     multiline_temp_holder.append((line, index))
