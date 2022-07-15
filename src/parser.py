@@ -6,9 +6,9 @@ from definition import ParsedComment
 from typing import Union, List, Tuple
 
 
-JS_ONELINE_PATTERN = "//"
-JS_MULTILINE_OPEN_PATTERN = "/\*"
-JS_MULTILINE_CLOSE_PATTERN = "\*/"
+JS_ONELINE_PATTERN = r"//"
+JS_MULTILINE_OPEN_PATTERN = r"/\*"
+JS_MULTILINE_CLOSE_PATTERN = r"\*/"
 
 # Think about if this is necessary
 def _find_oneline_comment_start_index(payload: List[str]) -> Union[int, None]:
@@ -80,7 +80,7 @@ def _handle_multiline_comment(comments, file_path: str) -> Union[ParsedComment, 
         result = ParsedComment(
             type="TODO",
             commentStyle="multiline",
-            title=title,
+            title=title, # TODO: trim the title for the case of comment ending with the closing pattern
             fullComment=full_comment,
             path=file_path,
             lineNumber=comment_at_index + 1,
