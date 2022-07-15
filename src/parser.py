@@ -62,9 +62,7 @@ def _handle_multiline_comment(comments, file_path: str) -> Union[ParsedComment, 
         while (i <= 3) and (i <= len(content) - 1):
 
             if re.search("TODO", content[i], re.IGNORECASE) is not None:
-                comment_to_parse = (
-                    True  # Flag that this multiline comment is a TODO comment
-                )
+                comment_to_parse = True  # flag for further processing
                 title = " ".join(content[i + 1 :])
                 comment_at_index = e[1]
                 break
@@ -125,7 +123,7 @@ def parse(path: str) -> int:
                     in_multiline_comment = True
                     multiline_temp_holder.append((line, index))
 
-                elif (in_multiline_comment and multiline_comment_close is None):
+                elif in_multiline_comment and multiline_comment_close is None:
                     multiline_temp_holder.append((line, index))
 
                 elif multiline_comment_close is not None:
