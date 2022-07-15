@@ -120,10 +120,9 @@ def parse(path: str) -> int:
 
                 if result is not None:
                     output.append(result)
-
-            elif (multiline_comment_open is not None) and (
-                multiline_comment_close is not None
-            ):
+            # fmt: off
+            elif (multiline_comment_open is not None) and (multiline_comment_close is not None):
+            # fmt: on
                 """Handle one-line comment with multiple comment noation"""
                 content = line.split()
                 result = _handle_oneline_comment(content, index + 1, path)
