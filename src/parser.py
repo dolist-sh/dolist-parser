@@ -10,7 +10,7 @@ JS_ONELINE_PATTERN = r"//"
 JS_MULTILINE_OPEN_PATTERN = r"/\*"
 JS_MULTILINE_CLOSE_PATTERN = r"\*/"
 
-# Think about if this is necessary
+# OPTIMIZE: Think about if this is necessary
 def _find_oneline_comment_start_index(payload: List[str]) -> Union[int, None]:
     result = None
 
@@ -20,6 +20,13 @@ def _find_oneline_comment_start_index(payload: List[str]) -> Union[int, None]:
             break
 
     return result
+
+
+def _get_title(comment: List[str]) -> str:
+    if re.search(JS_MULTILINE_CLOSE_PATTERN, comment[-1]) is not None:
+        return " ".join(comment[1:-1])
+
+    return " ".join(comment[1:])
 
 
 def _handle_oneline_comment(
@@ -37,7 +44,7 @@ def _handle_oneline_comment(
             result = ParsedComment(
                 type="TODO",
                 commentStyle="oneline",
-                title=" ".join(comment[i + 1 :]),
+                title=_get_title(comment),
                 fullComment=[" ".join(comment)],
                 path=file_path,
                 lineNumber=line_num,
@@ -55,16 +62,14 @@ def _handle_multiline_comment(comments, file_path: str) -> Union[ParsedComment, 
     comment_to_parse = False
 
     for e in comments:
-        content = e[0].split()
+        comment = e[0].split()
 
         i = 0
 
-        while (i <= 3) and (i <= len(content) - 1):
-            print(content[i])
-
-            if re.search("TODO", content[i], re.IGNORECASE) is not None:
+        while (i <= 3) and (i <= len(comment) - 1):
+            if re.search("TODO", comment[i], re.IGNORECASE) is not None:
                 comment_to_parse = True  # flag for further processing
-                title = " ".join(content[i + 1 :])
+                title = _get_title(comment)
                 comment_at_index = e[1]
                 break
 
