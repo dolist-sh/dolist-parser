@@ -22,11 +22,13 @@ def _find_oneline_comment_start_index(payload: List[str]) -> Union[int, None]:
     return result
 
 
-def _get_title(comment: List[str]) -> str:
+def _get_title(comment: List[str], index: int) -> str:
+    print("TODO is at the index: " + str(index))
+    # Remove the closing pattern if it's part of the title
     if re.search(JS_MULTILINE_CLOSE_PATTERN, comment[-1]) is not None:
-        return " ".join(comment[1:-1])
+        return " ".join(comment[index + 1 : -1]).capitalize()
 
-    return " ".join(comment[1:])
+    return " ".join(comment[index + 1 :]).capitalize()
 
 
 def _handle_oneline_comment(
@@ -44,7 +46,7 @@ def _handle_oneline_comment(
             result = ParsedComment(
                 type="TODO",
                 commentStyle="oneline",
-                title=_get_title(comment),
+                title=_get_title(comment, i),
                 fullComment=[" ".join(comment)],
                 path=file_path,
                 lineNumber=line_num,
@@ -71,7 +73,7 @@ def _handle_multiline_comment(
         while (i <= 3) and (i <= len(comment) - 1):
             if re.search("TODO", comment[i], re.IGNORECASE) is not None:
                 comment_to_parse = True  # flag for further processing
-                title = _get_title(comment)
+                title = _get_title(comment, i)
                 comment_at_index = e[1]
                 break
 
