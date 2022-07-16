@@ -56,7 +56,9 @@ def _handle_oneline_comment(
     return result
 
 
-def _handle_multiline_comment(comments, file_path: str) -> Union[ParsedComment, None]:
+def _handle_multiline_comment(
+    comments: List[Tuple[str, int]], file_path: str
+) -> Union[ParsedComment, None]:
     title = ""
     comment_at_index = None
     comment_to_parse = False
