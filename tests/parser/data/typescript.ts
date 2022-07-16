@@ -7,6 +7,11 @@ class Person {
 
 // createPerson call is a factory method
 
+/**
+ * TODO: Rephrase the function documentaion
+ * createPerson method is a factory function that produce the instance of Person
+ * @returns Person
+ */
 function createPerson() : Person {
     return {
         name: "A Person",// A Person's name
@@ -21,4 +26,10 @@ function createPerson() : Person {
 ////TODo: Should be parsed regardless of number of forward slash
 ////todo: Should be parsed regardless of number of forward slash
 
-// This file should parse 8 to-dos
+/** TODO: this is currently not parsed */
+
+/** TODO: This should also be parsed
+ * 
+ */
+
+// This file should parse 11 to-dos

@@ -5,6 +5,17 @@ const person = {
     age: "number",
 }
 
+/**
+ * TODO: add a function documentation
+ *  
+ */
+
+/**
+ * 
+ *  
+ * TODO: refactor createPerson
+ */
+
 // createPerson call is a factory method
 
 function createPerson() {
@@ -14,4 +25,19 @@ function createPerson() {
     }
 }
 
-// This file should parse 3 to-dos
+/** this should not be parsed */
+
+/** this should not be parsed
+ * 
+ */
+
+/** TODO: this should be parsed
+ * 
+ */
+
+
+/**
+ * 
+ TODO: this should be parsed */
+
+// This file should parse 7 to-dos
