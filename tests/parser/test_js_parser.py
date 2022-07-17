@@ -1,6 +1,6 @@
 import pytest
 from os import getcwd
-from src.parser import parse
+from src.parsers.js import parse
 
 pwd = getcwd()
 

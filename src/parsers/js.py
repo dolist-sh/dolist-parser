@@ -1,7 +1,4 @@
 import re
-import json
-from utils import get_filepath, write_to_json
-
 from definition import ParsedComment
 from typing import Union, List, Tuple
 
