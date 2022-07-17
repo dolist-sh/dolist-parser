@@ -99,10 +99,10 @@ def _handle_multiline_comment(
     return result
 
 
-def parse(path: str) -> int:
-    full_path = get_filepath(path)
+def parse(path: str) -> List[ParsedComment]:
+    # full_path = get_filepath(path)
 
-    with open(full_path, "r") as file:
+    with open(path, "r") as file:
         output = []
 
         # Variables to hold temp data for checking multiline comments
@@ -154,8 +154,8 @@ def parse(path: str) -> int:
                     in_multiline_comment = False
                     multiline_temp_holder = []
 
-        write_to_json(json.dumps(output))
-
-        print("All done! ✨ 🍰 ✨")
-        print(f"Found {len(output)} to-dos from comment")
-        return len(output)
+        print("-----------------------------")
+        print(f"Parsed {path}! ✨ 🍰 ✨")
+        print(f"Found {len(output)} to-dos")
+        print("-----------------------------")
+        return output
