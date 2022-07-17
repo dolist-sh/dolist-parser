@@ -1,15 +1,3 @@
-def get_filepath(path: str) -> str:
-    import os
-
-    directory = os.getcwd()
-    filepath = path
-
-    if path[0] != "/":
-        filepath = f"/{filepath}"
-
-    return f"{directory}{filepath}"
-
-
 def write_to_json(json_payload: str):
     import datetime
     import time
