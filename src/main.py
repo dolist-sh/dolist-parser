@@ -1,5 +1,5 @@
 import os
-from src.parser import parse
+from parsers.js import parse
 from definition import ParsedComment
 from typing import List
 

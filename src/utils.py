@@ -1,4 +1,4 @@
-#TODO: Double check if this is necessary and remove it if not
+# TODO: Double check if this is necessary and remove it if not
 def get_filepath(path: str) -> str:
     import os
 
