@@ -6,7 +6,7 @@ pwd = getcwd()
 
 
 def test_py_parser():
-    """Should parse 2 to-dos from the file"""
+    """Should parse 6 to-dos from the file"""
     result = parse(f"{pwd}/tests/parser/python/src/python.py")
 
-    assert len(result) == 2
+    assert len(result) == 6
