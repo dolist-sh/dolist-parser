@@ -97,7 +97,6 @@ def _handle_multiline_comment(
 
 
 def parse(path: str) -> List[ParsedComment]:
-    # full_path = get_filepath(path)
 
     with open(path, "r") as file:
         output = []

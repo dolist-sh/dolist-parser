@@ -7,14 +7,14 @@ pwd = getcwd()
 
 def test_parser_typescript():
     """Should parse 11 to-dos from input file"""
-    result = parse(f"{pwd}/tests/parser/data/typescript.ts")
+    result = parse(f"{pwd}/tests/parser/js/src/typescript.ts")
 
     assert len(result) == 11
 
 
 def test_parser_javascript():
     """Should parse 7 to-dos from input file"""
-    result = parse(f"{pwd}/tests/parser/data/javascript.js")
+    result = parse(f"{pwd}/tests/parser/js/src/javascript.js")
 
     assert len(result) == 7
 
