@@ -8,10 +8,10 @@ JS_MULTILINE_OPEN_PATTERN = r"/\*"
 JS_MULTILINE_CLOSE_PATTERN = r"\*/"
 
 # OPTIMIZE: Think about if this is necessary
-def _find_oneline_comment_start_index(payload: List[str]) -> Union[int, None]:
+def _find_oneline_comment_start_index(comment: List[str]) -> Union[int, None]:
     result = None
 
-    for (index, value) in enumerate(payload):
+    for (index, value) in enumerate(comment):
         if re.match(f"^{JS_ONELINE_PATTERN}", value, re.IGNORECASE) is not None:
             result = index
             break
