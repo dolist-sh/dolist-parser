@@ -1,4 +1,5 @@
 import re
+from utils import trim_path
 from definition import ParsedComment
 from typing import List, Union, Tuple
 
@@ -53,7 +54,7 @@ class BaseParser:
                     commentStyle="oneline",
                     title=self._get_title(comment, i),
                     fullComment=[" ".join(comment)],
-                    path=file_path,
+                    path=trim_path(file_path),
                     lineNumber=line_num,
                 )
                 break
@@ -68,6 +69,7 @@ class BaseParser:
         title = ""
         comment_at_index = None
         comment_to_parse = False
+
 
         for e in comments:
             comment = e[0].split()
@@ -96,7 +98,7 @@ class BaseParser:
                 commentStyle="multiline",
                 title=title,
                 fullComment=full_comment,
-                path=file_path,
+                path=trim_path(file_path),
                 lineNumber=comment_at_index + 1,
             )
 

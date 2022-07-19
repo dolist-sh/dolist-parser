@@ -10,3 +10,11 @@ def write_to_json(json_payload: str):
     ) as output_file:
         output_file.write(json_payload)
         output_file.close
+
+def trim_path(path: str) -> str:
+    """Temp hack"""
+    import os
+    cwd = os.getcwd()
+    length = len(cwd)
+    print(length)
+    return path[length:]
