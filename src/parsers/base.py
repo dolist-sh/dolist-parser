@@ -43,10 +43,13 @@ class BaseParser:
         comment = comment[self._find_oneline_comment_start_index(comment) :]
         result = None
 
+        comment_length = len(comment)
+        counter = 3 if (comment_length >= 3) else comment_length
+
         # Find a trace of todo in the first three words
         i = 0
 
-        while i <= 3:
+        while i < counter:
 
             if re.search("TODO", comment[i], re.IGNORECASE) is not None:
                 result = ParsedComment(
@@ -69,7 +72,6 @@ class BaseParser:
         title = ""
         comment_at_index = None
         comment_to_parse = False
-
 
         for e in comments:
             comment = e[0].split()

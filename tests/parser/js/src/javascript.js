@@ -4,6 +4,8 @@ const person = {
     name: "string", //TODO: update the name field to something else
     age: "number",
 }
+//
+//
 
 /**
  * TODO: add a function documentation
