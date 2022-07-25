@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "comment-parser"
+name = "dolist_parser"
 version = "0.1.0"
 description = "Parse to-dos from the comment"
 authors = ["yunjae <yunjae.oh.nl@gmail.com>"]
