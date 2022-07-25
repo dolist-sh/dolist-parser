@@ -1,6 +1,6 @@
 import os
 import json
-from main import run
+from dolist_parser import run
 from utils import write_to_json
 
 if __name__ == "__main__":

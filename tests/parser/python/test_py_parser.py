@@ -1,6 +1,6 @@
 import pytest
 from os import getcwd
-from src.parsers.python import PYParser
+from dolist_parser.parsers.python import PYParser
 
 pwd = getcwd()
 

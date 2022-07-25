@@ -1,3 +1,5 @@
+"""A Module to run parser locally"""
+
 import os
 import re
 
