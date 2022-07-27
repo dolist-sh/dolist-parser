@@ -57,7 +57,7 @@ class BaseParser:
                     commentStyle="oneline",
                     title=self._get_title(comment, i),
                     fullComment=[" ".join(comment)],
-                    path=trim_path(file_path),
+                    path=file_path,  # TODO: trim_path should be called when running on fs
                     lineNumber=line_num,
                 )
                 break
@@ -100,7 +100,7 @@ class BaseParser:
                 commentStyle="multiline",
                 title=title,
                 fullComment=full_comment,
-                path=trim_path(file_path),
+                path=file_path,
                 lineNumber=comment_at_index + 1,
             )
 

@@ -5,6 +5,8 @@ import os
 
 from parsers.javascript import JSParser
 from parsers.python import PYParser
+from parsers.javascript_gh import JSParserGitHub
+from parsers.python_gh import PYParserGithub
 
 from definition import ParsedComment
 from typing import List
@@ -20,6 +22,11 @@ js_parser = JSParser(
     JS_ONELINE_PATTERN, JS_MULTILINE_OPEN_PATTERN, JS_MULTILINE_CLOSE_PATTERN
 )
 py_parser = PYParser(PY_ONELINE_PATTERN, PY_MULTILINE_PATTERN)
+
+js_gh_parser = JSParserGitHub(
+    JS_ONELINE_PATTERN, JS_MULTILINE_OPEN_PATTERN, JS_MULTILINE_CLOSE_PATTERN
+)
+py_gh_parser = PYParserGithub(PY_ONELINE_PATTERN, PY_MULTILINE_PATTERN)
 
 
 def run(path: str) -> List[ParsedComment]:
