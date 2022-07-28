@@ -1,7 +1,7 @@
 import os
 import json
 
-from dolist_parser import run
+from dolistparser import run
 from utils import write_to_json
 
 
