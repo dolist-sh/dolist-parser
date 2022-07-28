@@ -2,12 +2,10 @@
 
 set -e
 
+PYPI_USERNAME=__token__
 API_TOKEN=$1
 
-export PYPI_USERNAME=__token__
-export PYPI_PASSWORD="${API_TOKEN}"
-
-poetry publish --build --username $PYPI_USERNAME --password $PYPI_PASSWORD
+poetry publish --build --username $PYPI_USERNAME --password $API_TOKEN
 
 exit 0
 
