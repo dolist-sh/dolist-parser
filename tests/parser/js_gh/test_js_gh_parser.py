@@ -1,6 +1,6 @@
 import pytest
 from os import getcwd
-from dolist_parser.parsers.javascript_gh import JSParserGitHub
+from dolistparser.parsers.javascript_gh import JSParserGitHub
 
 pwd = getcwd()
 

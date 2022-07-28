@@ -1,6 +1,6 @@
 import pytest
 from os import getcwd
-from dolist_parser.dolist_parser import run
+from dolistparser import run
 
 pwd = getcwd()
 
