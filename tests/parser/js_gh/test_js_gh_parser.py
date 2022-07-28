@@ -1,16 +1,8 @@
 import pytest
 from os import getcwd
-from dolistparser.parsers.javascript_gh import JSParserGitHub
+from dolistparser import js_gh_parser
 
 pwd = getcwd()
-
-JS_ONELINE_PATTERN = r"//"
-JS_MULTILINE_OPEN_PATTERN = r"/\*"
-JS_MULTILINE_CLOSE_PATTERN = r"\*/"
-
-js_parser = JSParserGitHub(
-    JS_ONELINE_PATTERN, JS_MULTILINE_OPEN_PATTERN, JS_MULTILINE_CLOSE_PATTERN
-)
 
 
 def test_parser_typescript():
@@ -19,7 +11,7 @@ def test_parser_typescript():
 
     with open(path, "r") as file:
         content = file.readlines()
-        result = js_parser.parse(content, "/js_gh/src/typescript.ts")
+        result = js_gh_parser.parse(content, "/js_gh/src/typescript.ts")
 
         assert len(result) == 11
 
@@ -30,7 +22,7 @@ def test_parser_javascript():
 
     with open(path, "r") as file:
         content = file.readlines()
-        result = js_parser.parse(content, "/js_gh/src/javascript.js")
+        result = js_gh_parser.parse(content, "/js_gh/src/javascript.js")
 
         print(result)
 

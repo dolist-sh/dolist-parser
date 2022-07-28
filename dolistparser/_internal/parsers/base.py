@@ -1,6 +1,6 @@
 import re
 from utils import trim_path
-from definition import ParsedComment
+from domain.comment import ParsedComment
 from typing import List, Union, Tuple
 
 

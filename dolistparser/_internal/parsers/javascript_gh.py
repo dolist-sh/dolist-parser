@@ -1,6 +1,6 @@
 import re
 from parsers.base import BaseParser
-from definition import ParsedComment
+from domain.comment import ParsedComment
 from typing import List
 
 

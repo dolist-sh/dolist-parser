@@ -1,8 +1,8 @@
 import os
 import json
 
-from dolistparser import run
-from utils import write_to_json
+from _internal.interfaces import run
+from _internal.utils import write_to_json
 
 
 if __name__ == "__main__":

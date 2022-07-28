@@ -5,8 +5,9 @@ import sys
 BASE_DIR = Path(__file__).resolve().parent
 sys.path.append(str(BASE_DIR))
 
-__version__ = "0.2.1"
+__version__ = "0.2.2"
 name = "dolistparser"
 
-from main import js_parser, py_parser, py_gh_parser, js_gh_parser, run
-from definition import ParsedComment
+
+from _internal.interfaces.api import js_parser, py_parser, py_gh_parser, js_gh_parser, run
+from _internal.domain.comment import ParsedComment

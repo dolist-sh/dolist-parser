@@ -1,13 +1,8 @@
 import pytest
 from os import getcwd
-from dolistparser.parsers.python_gh import PYParserGithub
+from dolistparser import py_gh_parser
 
 pwd = getcwd()
-
-PY_ONELINE_PATTERN = r"#"
-PY_MULTILINE_PATTERN = r'(\""")'
-
-py_parser = PYParserGithub(PY_ONELINE_PATTERN, PY_MULTILINE_PATTERN)
 
 
 def test_py_parser():
@@ -16,6 +11,6 @@ def test_py_parser():
 
     with open(path, "r") as file:
         content = file.readlines()
-        result = py_parser.parse(content, "/py_gh/src/python.py")
+        result = py_gh_parser.parse(content, "/py_gh/src/python.py")
 
         assert len(result) == 6

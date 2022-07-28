@@ -1,16 +1,8 @@
 import pytest
 from os import getcwd
-from dolistparser.parsers.javascript import JSParser
+from dolistparser import js_parser
 
 pwd = getcwd()
-
-JS_ONELINE_PATTERN = r"//"
-JS_MULTILINE_OPEN_PATTERN = r"/\*"
-JS_MULTILINE_CLOSE_PATTERN = r"\*/"
-
-js_parser = JSParser(
-    JS_ONELINE_PATTERN, JS_MULTILINE_OPEN_PATTERN, JS_MULTILINE_CLOSE_PATTERN
-)
 
 
 def test_parser_typescript():

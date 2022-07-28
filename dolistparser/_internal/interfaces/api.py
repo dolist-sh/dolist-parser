@@ -1,5 +1,3 @@
-""" Export language parsers """
-
 import re
 import os
 
@@ -8,8 +6,10 @@ from parsers.python import PYParser
 from parsers.javascript_gh import JSParserGitHub
 from parsers.python_gh import PYParserGithub
 
-from definition import ParsedComment
+from domain.comment import ParsedComment
 from typing import List
+
+""" Export language parsers and run as API of module """
 
 JS_ONELINE_PATTERN = r"//"
 JS_MULTILINE_OPEN_PATTERN = r"/\*"
