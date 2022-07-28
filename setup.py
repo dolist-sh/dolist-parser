@@ -1,8 +1,8 @@
 from setuptools import setup
 
 setup(
-    name="dolist_parser",
-    version="0.0.1",
+    name="dolistparser",
+    version="0.2.1",
     description="Parser for dolist.sh",
     url="https://github.com/dolist-sh/dolist-parser",
     author="Yunjae Oh",
