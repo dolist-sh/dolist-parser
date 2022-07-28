@@ -1,6 +1,6 @@
 import pytest
 from os import getcwd
-from dolist_parser.parsers.javascript import JSParser
+from dolistparser.parsers.javascript import JSParser
 
 pwd = getcwd()
 

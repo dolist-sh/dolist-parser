@@ -5,7 +5,7 @@ description = "Parse to-dos from the comment"
 authors = ["yunjae <yunjae.oh.nl@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
 pydantic = "^1.9.1"
 
 [tool.poetry.dev-dependencies]
